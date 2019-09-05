@@ -29,19 +29,13 @@ module.exports = {
     // airbnb-base
     complexity: [WARN, 11],
     'no-eq-null': ERROR,
-    'no-magic-numbers': [ERROR, {
-      ignore: [0, -1, 1, 100],
-      ignoreArrayIndexes: true,
-      enforceConst: true,
-      detectObjects: false,
-    }],
     'no-param-reassign': [ERROR, {
       props: true,
       ignorePropertyModificationsFor: [
         'state', // for mutation vuex
         'acc', // for reduce accumulators
         'e', // for e.return value
-      ]
+      ],
     }],
 
     // vue
@@ -51,9 +45,9 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
     parserOptions: {
-      "ecmaVersion": 2017,
-      "sourceType": "module"
-    }
+      ecmaVersion: 2017,
+      sourceType: 'module',
+    },
   },
   overrides: [
     {
@@ -61,7 +55,7 @@ module.exports = {
       rules: {
         'import/no-commonjs': OFF,
         'global-require': OFF,
-      }
+      },
     },
-  ]
+  ],
 };
