@@ -1,16 +1,28 @@
 <template>
   <v-form>
     <text-field
+      v-model="arrivalAirport"
       label="Departure airport"
     />
-    <text-field label="Arrival airport" />
-    <date-field label="Departure date" />
-    <vue-select label="Class" />
+    <text-field
+      v-model="departureAirport"
+      label="Arrival airport"
+    />
+    <date-field
+      v-model="date"
+      label="Departure date"
+    />
+    <vue-select
+      v-model="flightClass"
+      :items="flightClasses"
+      label="Class"
+    />
     <v-btn
       large
       depressed
       color="primary"
       min-height="56"
+      @click="$emit('submit', $data)"
     >
       Search
     </v-btn>
@@ -28,6 +40,20 @@ export default {
     DateField,
     TextField,
     VueSelect: Select,
+  },
+  props: {
+    flightClasses: {
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      date: '',
+      flightClass: '',
+      arrivalAirport: '',
+      departureAirport: '',
+    };
   },
 };
 </script>

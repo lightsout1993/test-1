@@ -19,6 +19,8 @@
     </template>
     <v-date-picker
       v-model="date"
+
+      v-on="$listeners"
       @input="menu = false"
     />
   </v-menu>

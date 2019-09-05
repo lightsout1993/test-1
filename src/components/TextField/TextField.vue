@@ -3,6 +3,7 @@
     outlined
     :label="label"
     max-height="56"
+    v-on="$listeners"
   />
 </template>
 

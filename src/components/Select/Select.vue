@@ -2,7 +2,8 @@
   <v-select
     outlined
     :label="label"
-    :items="['A', 'B', 'C', 'D', 'E']"
+    :items="items"
+    v-on="$listeners"
   />
 </template>
 
@@ -12,6 +13,10 @@ export default {
   props: {
     label: {
       type: String,
+      required: true,
+    },
+    items: {
+      type: Array,
       required: true,
     },
   },
