@@ -35,6 +35,7 @@ export default {
   }
   .v-expansion-panel-header {
     > img {
+      max-width: 100px;
       margin-right: 2em;
     }
     > span {

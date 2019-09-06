@@ -12,8 +12,10 @@
       <v-text-field
         v-model="date"
         readonly
+        required
         outlined
         :label="label"
+        :rules="[value => !!value || 'Required.']"
         v-on="on"
       />
     </template>

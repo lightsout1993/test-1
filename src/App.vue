@@ -1,6 +1,7 @@
 <template>
   <v-app id="app">
     <vue-form
+      :fetching="fetching"
       :flight-classes="flightClasses"
       @submit="search"
     />
@@ -37,6 +38,7 @@ export default {
       apiId,
       airlines: [],
       authKey: null,
+      fetching: false,
       flightClasses: ['E', 'W', 'B', 'F'],
     };
   },

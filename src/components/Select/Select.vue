@@ -1,8 +1,10 @@
 <template>
   <v-select
     outlined
+    required
     :label="label"
     :items="items"
+    :rules="[value => !!value || 'Required.']"
     v-on="$listeners"
   />
 </template>

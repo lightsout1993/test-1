@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-expansion-panels v-if="airlines.length">
+    <v-expansion-panels
+      v-if="!fetching"
+      multiple
+    >
       <airline
         v-for="({ logo, title, offers }, key) in airlines"
         :key="key"
@@ -10,6 +13,13 @@
         <offers-list :offers="offers" />
       </airline>
     </v-expansion-panels>
+    <v-progress-circular
+      v-else
+      :size="70"
+      :width="7"
+      color="primary"
+      indeterminate
+    />
   </v-container>
 </template>
 
@@ -28,12 +38,18 @@ export default {
       type: Array,
       default: () => [],
     },
+    fetching: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
 
 <style lang="scss">
-  .v-select {
-    width: 1em;
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

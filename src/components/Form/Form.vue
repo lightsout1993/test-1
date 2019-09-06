@@ -1,5 +1,9 @@
 <template>
-  <v-form>
+  <v-form
+    ref="form"
+    v-model="valid"
+    lazy-validation
+  >
     <text-field
       v-model="departureAirport"
       label="Departure airport"
@@ -22,7 +26,8 @@
       depressed
       color="primary"
       min-height="56"
-      @click="$emit('submit', $data)"
+      :disabled="!valid || fetching"
+      @click="validate"
     >
       Search
     </v-btn>
@@ -46,14 +51,26 @@ export default {
       type: Array,
       required: true,
     },
+    fetching: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
       date: '',
+      valid: false,
       flightClass: '',
       arrivalAirport: '',
       departureAirport: '',
     };
+  },
+  methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.$emit('submit', this.$data);
+      }
+    },
   },
 };
 </script>
