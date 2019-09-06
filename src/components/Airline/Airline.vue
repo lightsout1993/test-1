@@ -4,7 +4,8 @@
       <img
         :src="logo"
         :alt="title"
-      > {{ title }}
+      >
+      <span>{{ title }}</span>
     </v-expansion-panel-header>
     <v-expansion-panel-content>
       <slot />
@@ -31,5 +32,13 @@ export default {
 <style lang="scss">
   .v-select {
     width: 1em;
+  }
+  .v-expansion-panel-header {
+    > img {
+      margin-right: 2em;
+    }
+    > span {
+      width: 100%;
+    }
   }
 </style>

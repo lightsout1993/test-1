@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <v-list>
     <offer
       v-for="(offer, key) in offers"
-
+      :id="key + 1"
       :key="key"
       v-bind="offer"
     />
-  </div>
+  </v-list>
 </template>
 
 <script>
@@ -29,5 +29,13 @@ export default {
 <style lang="scss">
   .v-select {
     width: 1em;
+  }
+
+  .v-expansion-panel-content {
+    .v-list-item {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid gray;
+    }
   }
 </style>

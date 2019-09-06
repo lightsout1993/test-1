@@ -1,7 +1,6 @@
-function formatSegments({ segments = [] } = {}, classSelected) {
+function formatSegments({ segments = [] } = {}) {
   console.log(segments);
   return segments
-    .filter(({ class: classOffer }) => classOffer === classSelected)
     .map(
       ({
         price,
@@ -21,7 +20,7 @@ function formatSegments({ segments = [] } = {}, classSelected) {
     );
 }
 
-export default function formatAirlines(airlines = [], classSelected) {
+export default function formatAirlines(airlines = []) {
   return airlines.map(({
     offers,
     carrier_logo: logo,
@@ -31,6 +30,6 @@ export default function formatAirlines(airlines = [], classSelected) {
     logo,
     carrierCode,
     title: `${carrierName} (${carrierCode})`,
-    offers: formatSegments(offers[0], classSelected),
+    offers: formatSegments(offers[0]),
   }));
 }

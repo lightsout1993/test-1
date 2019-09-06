@@ -4,7 +4,10 @@
       :flight-classes="flightClasses"
       @submit="search"
     />
-    <airlines-list :airlines="airlines" />
+    <airlines-list
+      :airlines="airlines"
+      :fetching="fetching"
+    />
   </v-app>
 </template>
 
@@ -96,17 +99,18 @@ export default {
       message, offers: airlines, request_id: requestId, status,
     }) {
       if (status === ERROR || (message !== NO_ERRORS && message !== SUCCESS)) {
+        this.fetching = false;
         throw new Error(message);
       }
 
-      if (status === READY) this.airlines = transformOffers(airlines);
+      this.airlines = transformOffers(airlines);
+
+      if (status === READY) this.fetching = false;
 
       if (status === IN_PROCCESS) {
-        this.airlines = transformOffers(airlines);
-        setTimeout(() => this.getOffers(requestId), 500);
+        this.fetching = true;
+        setTimeout(() => this.getOffers(requestId), 800);
       }
-
-      console.dir(this.airlines);
     },
   },
 };
@@ -115,7 +119,12 @@ export default {
 <style lang="scss">
   .v-application--wrap {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding: 100px 20%;
+
+    > .container {
+      margin-top: 50px;
+    }
   }
 </style>

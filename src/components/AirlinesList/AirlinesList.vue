@@ -1,13 +1,12 @@
 <template>
   <v-container>
-    <v-expansion-panels>
+    <v-expansion-panels v-if="airlines.length">
       <airline
         v-for="({ logo, title, offers }, key) in airlines"
         :key="key"
         :logo="logo"
         :title="title"
       >
-        123
         <offers-list :offers="offers" />
       </airline>
     </v-expansion-panels>

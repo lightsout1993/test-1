@@ -60,8 +60,8 @@ export default {
 
 <style lang="scss">
   .v-form {
-    width: 70%;
     display: flex;
+    width: 100%;
 
     > div.v-input, button {
       margin: 5px !important;
