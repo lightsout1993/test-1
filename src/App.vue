@@ -13,8 +13,7 @@
 </template>
 
 <script>
-import Form from '@/components/Form';
-import AirlinesList from '@/components/AirlinesList';
+import { Form, AirlinesList } from '@/components';
 import {
   api, apiId, client, transformOffers,
 } from '@/helpers';

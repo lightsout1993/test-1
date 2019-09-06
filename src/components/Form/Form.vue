@@ -35,9 +35,7 @@
 </template>
 
 <script>
-import DateField from '../DateField';
-import TextField from '../TextField';
-import Select from '../Select';
+import { DateField, TextField, Select } from '@/components';
 
 export default {
   name: 'Form',
