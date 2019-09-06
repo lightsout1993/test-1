@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { Offer } from '@/components';
+import Offer from '@/components/Offer';
 
 export default {
   name: 'OffersList',

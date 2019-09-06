@@ -8,12 +8,14 @@
     <airlines-list
       :airlines="airlines"
       :fetching="fetching"
+      :started-search="startedSearch"
     />
   </v-app>
 </template>
 
 <script>
-import { Form, AirlinesList } from '@/components';
+import Form from '@/components/Form';
+import AirlinesList from '@/components/AirlinesList';
 import {
   api, apiId, client, transformOffers,
 } from '@/helpers';
@@ -24,6 +26,8 @@ const ERROR = 'Error';
 
 const NO_ERRORS = 'Нет ошибок';
 const SUCCESS = 'Успешно';
+
+const TIMEOUT = 800;
 
 export default {
   name: 'App',
@@ -38,6 +42,7 @@ export default {
       airlines: [],
       authKey: null,
       fetching: false,
+      startedSearch: false,
       flightClasses: ['E', 'W', 'B', 'F'],
     };
   },
@@ -85,6 +90,8 @@ export default {
         body: JSON.stringify(body),
       };
 
+      this.startedSearch = true;
+
       client(`${this.api}/air/search`, options)
         .then(({ request_id: requestId }) => this.getOffers(requestId))
         .catch(error => console.error(error));
@@ -110,7 +117,7 @@ export default {
 
       if (status === IN_PROCCESS) {
         this.fetching = true;
-        setTimeout(() => this.getOffers(requestId), 800);
+        setTimeout(() => this.getOffers(requestId), TIMEOUT);
       }
     },
   },
@@ -125,7 +132,7 @@ export default {
     padding: 100px 20%;
 
     > .container {
-      margin-top: 50px;
+      margin-top: 30px;
     }
   }
 </style>

@@ -5,13 +5,13 @@
     <span><b>Departure airport:</b> {{ departureAirport }}</span>
     <span><b>Arrival time:</b> {{ arrivalDate }}</span>
     <span><b>Arrival airport:</b> {{ arrivalAirport }}</span>
-    <span><b>Duration:</b> {{ durationFormatted }}</span>
+    <span><b>Duration:</b> {{ duration | formatMinutes }}</span>
     <span><b>Price:</b> {{ price }}</span>
   </v-list-item>
 </template>
 
 <script>
-import { addMinutes, format, fromUnixTime } from 'date-fns';
+import { format, fromUnixTime } from 'date-fns';
 
 export default {
   name: 'Offer',
@@ -51,9 +51,6 @@ export default {
     },
     departureDate() {
       return format(fromUnixTime(this.departureTimestamp), 'yyyy-MM-dd hh:mm');
-    },
-    durationFormatted() {
-      return format(addMinutes(new Date(0), this.duration), 'h\'h\' m\'m\'');
     },
   },
 };
