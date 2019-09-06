@@ -3,7 +3,7 @@
     flat
     color="transparent"
   >
-    <v-subheader>Flight duration in minutes</v-subheader>
+    <v-subheader>Flight duration</v-subheader>
     <v-card-text>
       <v-range-slider
         v-model="duration"
