@@ -1,11 +1,11 @@
 <template>
   <v-form>
     <text-field
-      v-model="arrivalAirport"
+      v-model="departureAirport"
       label="Departure airport"
     />
     <text-field
-      v-model="departureAirport"
+      v-model="arrivalAirport"
       label="Arrival airport"
     />
     <date-field

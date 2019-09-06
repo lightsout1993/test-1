@@ -1,28 +1,38 @@
 <template>
   <v-app id="app">
-    <Form
+    <vue-form
       :flight-classes="flightClasses"
       @submit="search"
     />
+    <airlines-list :airlines="airlines" />
   </v-app>
 </template>
 
 <script>
 import Form from '@/components/Form';
-import client from './client';
+import AirlinesList from '@/components/AirlinesList';
+import {
+  api, apiId, client, transformOffers,
+} from '@/helpers';
 
-const api = process.env.VUE_APP_API;
-const apiId = process.env.VUE_APP_API_ID;
+const IN_PROCCESS = 'InProcess';
+const READY = 'Ready';
+const ERROR = 'Error';
+
+const NO_ERRORS = 'Нет ошибок';
+const SUCCESS = 'Успешно';
 
 export default {
   name: 'App',
   components: {
-    Form,
+    AirlinesList,
+    VueForm: Form,
   },
   data() {
     return {
       api,
       apiId,
+      airlines: [],
       authKey: null,
       flightClasses: ['E', 'W', 'B', 'F'],
     };
@@ -52,13 +62,17 @@ export default {
       const body = {
         directions: [
           {
-            departure_code: departureAirport,
-            arrival_code: arrivalAirport,
             date,
+            arrival_code: arrivalAirport,
+            departure_code: departureAirport,
           },
         ],
         adult_qnt: 1,
         class: flightClass,
+        fare_types: [
+          'PUB',
+          'NEG',
+        ],
       };
 
       const options = {
@@ -74,7 +88,25 @@ export default {
 
     getOffers(requestId) {
       client(`${this.api}/air/offers?request_id=${requestId}`, { headers: this.headers })
-        .then(response => console.dir(response));
+        .then(this.handlerOffersResponse)
+        .catch(error => console.error(error));
+    },
+
+    handlerOffersResponse({
+      message, offers: airlines, request_id: requestId, status,
+    }) {
+      if (status === ERROR || (message !== NO_ERRORS && message !== SUCCESS)) {
+        throw new Error(message);
+      }
+
+      if (status === READY) this.airlines = transformOffers(airlines);
+
+      if (status === IN_PROCCESS) {
+        this.airlines = transformOffers(airlines);
+        setTimeout(() => this.getOffers(requestId), 500);
+      }
+
+      console.dir(this.airlines);
     },
   },
 };
